@@ -1,0 +1,48 @@
+﻿@model PracticalTask.Models.InputModel
+@{
+    ViewBag.Title = "Enter Timetable Parameters";
+}
+
+<h2>Timetable Setup</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.WorkingDays)
+        @Html.TextBoxFor(m => m.WorkingDays)
+        @Html.ValidationMessageFor(m => m.WorkingDays)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.SubjectsPerDay)
+        @Html.TextBoxFor(m => m.SubjectsPerDay)
+        @Html.ValidationMessageFor(m => m.SubjectsPerDay)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.TotalSubjects)
+        @Html.TextBoxFor(m => m.TotalSubjects)
+        @Html.ValidationMessageFor(m => m.TotalSubjects)
+    </div>
+
+    <div>
+        <strong>Total Weekly Hours: </strong> 
+        <span id="totalHours">@Model?.TotalHours ?? 0</span>
+    </div>
+
+    <input type="submit" value="Next" />
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function calculateHours() {
+            var wd = parseInt($('#WorkingDays').val()) || 0;
+            var spd = parseInt($('#SubjectsPerDay').val()) || 0;
+            $('#totalHours').text(wd * spd);
+        }
+
+        $('#WorkingDays, #SubjectsPerDay').on('input', calculateHours);
+    </script>
+}

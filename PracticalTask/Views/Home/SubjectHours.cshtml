@@ -1,0 +1,22 @@
+﻿@model PracticalTask.Models.SubjectHoursModel
+@{
+    ViewBag.Title = "Enter Hours for Each Subject";
+}
+
+<h2>Enter Subject Hours</h2>
+<p>Total Weekly Hours: <strong>@Model.TotalHours</strong></p>
+
+@using (Html.BeginForm())
+{
+    for (int i = 0; i < Model.SubjectHours.Count; i++)
+    {
+        <div>
+            @Html.TextBoxFor(m => m.SubjectHours[i].SubjectName)
+            @Html.TextBoxFor(m => m.SubjectHours[i].Hours, new { type = "number", min = 0 })
+        </div>
+    }
+
+    <input type="submit" value="Generate Timetable" />
+}
+
+@Html.ValidationSummary()

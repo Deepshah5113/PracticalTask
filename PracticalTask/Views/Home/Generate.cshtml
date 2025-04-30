@@ -1,0 +1,31 @@
+﻿@model PracticalTask.Models.TimeTableModel
+@{
+    ViewBag.Title = "Generated Time Table";
+    int total = 0;
+}
+
+<h2>Generated Timetable</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            @for (int day = 1; day <= Model.WorkingDays; day++)
+            {
+                <th>Day @day</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for (int row = 0; row < Model.SubjectsPerDay; row++)
+        {
+            <tr>
+                @for (int col = 0; col < Model.WorkingDays; col++)
+                {
+                    <td>
+                        @Model.Subjects[total++]
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
